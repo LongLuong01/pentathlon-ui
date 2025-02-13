@@ -6,8 +6,9 @@ const AthleteList = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        const token = localStorage.getItem("token"); // Lấy token từ localStorage
-
+        const userLogin = localStorage.getItem("user"); // Lấy token từ localStorage
+        const token = JSON.parse(userLogin).token;
+        
         if (!token) {
             setError("Bạn chưa đăng nhập!");
             setLoading(false);
@@ -16,7 +17,7 @@ const AthleteList = () => {
 
         fetch("http://localhost:5000/api/athletes", {
             headers: {
-                "Authorization": `Bearer ${localStorage.getItem("token")}`, // Đảm bảo gửi đúng token
+                "Authorization": `Bearer ${token}`, // Đảm bảo gửi đúng token
                 "Content-Type": "application/json"
             },
         })

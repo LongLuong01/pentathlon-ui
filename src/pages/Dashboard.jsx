@@ -6,7 +6,7 @@ const Dashboard = () => {
     const [fullname, setFullname] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     // lay danh sach vdv tu server
     useEffect(() => {
@@ -45,16 +45,15 @@ const Dashboard = () => {
             .finally(() => setLoading(false))
     }, [])
 
+    // Mở & đóng popup
+    const openModal = () => setIsModalOpen(true)
+    const closeModal = () => {
+        setIsModalOpen(false)
+        setFullname('')
+        setEmail('')
+        setPhone('')
+    }
 
-  // Mở & đóng popup
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setFullname("");
-    setEmail("");
-    setPhone("");
-  };
-    
     // thêm vđv mới
     const handleAddAthlete = async (e) => {
         e.preventDefault()
@@ -112,89 +111,126 @@ const Dashboard = () => {
 
     return (
         <div className="p-6">
-        <h2 className="text-2xl font-bold mb-4">Quản lý vận động viên</h2>
-  
-        {/* Button mở popup thêm vận động viên */}
-        <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2 rounded mb-4">
-          + Thêm VĐV
-        </button>
-  
-        {/* Popup thêm vận động viên */}
-        {isModalOpen && (
-          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-              <h3 className="text-lg font-semibold mb-4">Thêm vận động viên</h3>
-              <form onSubmit={handleAddAthlete}>
-                <input
-                  type="text"
-                  placeholder="Họ và tên"
-                  className="border p-2 w-full mb-2"
-                  value={fullname}
-                  onChange={(e) => setFullname(e.target.value)}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="border p-2 w-full mb-2"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Số điện thoại"
-                  className="border p-2 w-full mb-4"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                />
-                <div className="flex justify-between">
-                  <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
-                    Thêm
-                  </button>
-                  <button onClick={closeModal} className="bg-red-500 text-white px-4 py-2 rounded">
-                    Hủy
-                  </button>
+            <h2 className="mb-4 text-2xl font-bold">Quản lý vận động viên</h2>
+
+            {/* Button mở popup thêm vận động viên */}
+            <button
+                onClick={openModal}
+                className="mb-4 rounded bg-blue-500 px-4 py-2 text-white"
+            >
+                + Thêm VĐV
+            </button>
+
+            {/* Popup thêm vận động viên */}
+            {/* Popup thêm VĐV */}
+            {isModalOpen && (
+                <div className="bg-opacity-50 fixed inset-0 flex items-center justify-center bg-gray-800">
+                    <div className="w-96 scale-100 transform rounded-lg bg-white p-6 shadow-lg transition-all duration-500 hover:scale-105">
+                        <h3 className="mb-4 text-lg font-semibold">
+                            Thêm vận động viên
+                        </h3>
+                        <form onSubmit={handleAddAthlete}>
+                            <input
+                                type="text"
+                                placeholder="Họ và tên"
+                                className="mb-2 w-full border p-2 transition duration-300 focus:ring-2 focus:ring-blue-500"
+                                value={fullname}
+                                onChange={(e) => setFullname(e.target.value)}
+                                required
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                className="mb-2 w-full border p-2 transition duration-300 focus:ring-2 focus:ring-blue-500"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                            <input
+                                type="text"
+                                placeholder="Số điện thoại"
+                                className="mb-4 w-full border p-2 transition duration-300 focus:ring-2 focus:ring-blue-500"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                required
+                            />
+                            <div className="flex justify-between">
+                                <button
+                                    type="submit"
+                                    className="rounded bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-600"
+                                >
+                                    Thêm
+                                </button>
+                                <button
+                                    onClick={closeModal}
+                                    className="rounded bg-red-500 px-4 py-2 text-white transition duration-300 hover:bg-red-600"
+                                >
+                                    Hủy
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </form>
-            </div>
-          </div>
-        )}
-  
-        {/* Hiển thị danh sách vận động viên */}
-        {loading ? (
-          <p>Đang tải dữ liệu...</p>
-        ) : (
-          <table className="w-full border-collapse border border-gray-300 shadow-lg">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-300 p-3">Họ và Tên</th>
-                <th className="border border-gray-300 p-3">Email</th>
-                <th className="border border-gray-300 p-3">Điện thoại</th>
-                <th className="border border-gray-300 p-3">Hành động</th>
-              </tr>
-            </thead>
-            <tbody>
-              {athletes.map((athlete) => (
-                <tr key={athlete.id} className="text-center hover:bg-gray-100">
-                  <td className="border border-gray-300 p-3">{athlete.fullname}</td>
-                  <td className="border border-gray-300 p-3">{athlete.email}</td>
-                  <td className="border border-gray-300 p-3">{athlete.phone}</td>
-                  <td className="border border-gray-300 p-3">
-                    <button
-                      onClick={() => handleDeleteAthlete(athlete.id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                    >
-                      Xóa
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+            )}
+
+            {/* Hiển thị danh sách vận động viên */}
+            {loading ? (
+                <p>Đang tải dữ liệu...</p>
+            ) : (
+                <table className="w-full border-collapse border border-gray-300 shadow-lg">
+                    <thead>
+                        <tr className="bg-gray-200">
+                            <th className="border border-gray-300 p-3">
+                                Họ và Tên
+                            </th>
+                            <th className="border border-gray-300 p-3">
+                                Email
+                            </th>
+                            <th className="border border-gray-300 p-3">
+                                Điện thoại
+                            </th>
+                            <th className="border border-gray-300 p-3">
+                                Hành động
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {athletes.map((athlete) => (
+                            <tr
+                                key={athlete.id}
+                                className="text-center hover:bg-gray-100"
+                            >
+                                <td className="border border-gray-300 p-3">
+                                    {athlete.fullname}
+                                </td>
+                                <td className="border border-gray-300 p-3">
+                                    {athlete.email}
+                                </td>
+                                <td className="border border-gray-300 p-3">
+                                    {athlete.phone}
+                                </td>
+                                <td className="border border-gray-300 p-3">
+                                    <button
+                                        onClick={() => openModal(athlete)} // Mở modal chỉnh sửa khi click
+                                        className="mx-2 rounded bg-yellow-500 px-3 py-1 text-white hover:bg-yellow-600"
+                                    >
+                                        Chỉnh sửa
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            handleDeleteAthlete(athlete.id)
+                                        }
+                                        className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600"
+                                    >
+                                        Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+        </div>
     )
 }
 

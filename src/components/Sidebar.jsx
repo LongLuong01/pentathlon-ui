@@ -1,8 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
 
 const Sidebar = () => {
   const { user, logout } = useContext(AuthContext);

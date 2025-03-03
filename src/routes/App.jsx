@@ -15,8 +15,12 @@ const PrivateRoute = ({ children }) => {
   console.log("private route")
   return user ? (
     <div>
+      <div className="flex overflow-y-hidden bg-white font-inter">
       <Sidebar />
+      </div>
+      <div className="body h-full overflow-hidden lg:ml-auto max-lg:w-full relative lg:w-[calc(100%-256px)] border-l border-solid border-gray-200">
       {children}
+      </div>
     </div>
   ) : (
     <Navigate to="/login" />
@@ -24,16 +28,20 @@ const PrivateRoute = ({ children }) => {
   // return user ? children : <Navigate to="/login" />;
 };
 
+
+
+
 function App() {
   return (
     <AuthProvider>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/athlete" element={<PrivateRoute><Athlete /></PrivateRoute>} />
         <Route path="/analyst" element={<PrivateRoute><Analyst /></PrivateRoute>} />
         <Route path="/calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
-        <Route path="*" element={<Navigate to="/login" />} />
+        {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Routes>
     </AuthProvider>
   );

@@ -36,54 +36,8 @@ const Login = () => {
         }
     }
 
-    // return (
-    //     <div className="flex h-screen items-center justify-center bg-gray-100">
-    //         <div className="w-96 rounded-lg bg-white p-6 shadow-lg">
-    //             <h2 className="mb-4 text-center text-2xl font-bold">
-    //                 Đăng nhập
-    //             </h2>
-    //             <form onSubmit={handleLogin}>
-    //                 <div className="mb-4">
-    //                     <label className="mb-1 block">Email</label>
-    //                     <input
-    //                         type="email"
-    //                         className="w-full rounded-lg border px-3 py-2"
-    //                         value={email}
-    //                         onChange={(e) => setEmail(e.target.value)}
-    //                         required
-    //                     />
-    //                 </div>
-    //                 <div className="mb-4">
-    //                     <label className="mb-1 block">Mật khẩu</label>
-    //                     <input
-    //                         type="password"
-    //                         className="w-full rounded-lg border px-3 py-2"
-    //                         value={password}
-    //                         onChange={(e) => setPassword(e.target.value)}
-    //                         required
-    //                     />
-    //                 </div>
-    //                 <button
-    //                     type="submit"
-    //                     className="w-full rounded-lg bg-blue-500 py-2 text-white"
-    //                 >
-    //                     Đăng nhập
-    //                 </button>
-    //             </form>
-    //         </div>
-    //     </div>
-    // )
-
     return (
       <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -155,7 +109,44 @@ const Login = () => {
       </div>
     </>
     );
-
+    
+    // return (
+    //     <div className="flex h-screen items-center justify-center bg-gray-100">
+    //         <div className="w-96 rounded-lg bg-white p-6 shadow-lg">
+    //             <h2 className="mb-4 text-center text-2xl font-bold">
+    //                 Đăng nhập
+    //             </h2>
+    //             <form onSubmit={handleLogin}>
+    //                 <div className="mb-4">
+    //                     <label className="mb-1 block">Email</label>
+    //                     <input
+    //                         type="email"
+    //                         className="w-full rounded-lg border px-3 py-2"
+    //                         value={email}
+    //                         onChange={(e) => setEmail(e.target.value)}
+    //                         required
+    //                     />
+    //                 </div>
+    //                 <div className="mb-4">
+    //                     <label className="mb-1 block">Mật khẩu</label>
+    //                     <input
+    //                         type="password"
+    //                         className="w-full rounded-lg border px-3 py-2"
+    //                         value={password}
+    //                         onChange={(e) => setPassword(e.target.value)}
+    //                         required
+    //                     />
+    //                 </div>
+    //                 <button
+    //                     type="submit"
+    //                     className="w-full rounded-lg bg-blue-500 py-2 text-white"
+    //                 >
+    //                     Đăng nhập
+    //                 </button>
+    //             </form>
+    //         </div>
+    //     </div>
+    // )
 
 }
 
